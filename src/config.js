@@ -5,4 +5,5 @@ export const {
   USER,
   PASSWORD,
   DATABASE,
+  TOKEN_SECRET
 } = process.env

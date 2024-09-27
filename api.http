@@ -6,11 +6,11 @@ POST http://localhost:1234/api/auth/register
 Content-Type: application/json
 
 {
-    "nombre": "Nayeli",
-    "apellido": "Silva Quiñon",
-    "email": "nayeli.silva@example.com",
-    "password": "password3",
-    "rol": "Cocinero"
+    "nombre": "Allison Lucia",
+    "apellido": "Grados Gil",
+    "email": "allison.grados@example.com",
+    "password": "password1",
+    "rol": "Administrador"
 }
 
 ### GET api/auth
