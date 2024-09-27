@@ -16,7 +16,7 @@ export class AuthController {
       const isValidPassword = await bcrypt.compare(password, usuarioEncontrado.password)
 
       if (!isValidPassword) {
-        return res.status(401).json({ message: 'Credenciales inválidas' })
+        return res.status(401).json({ error: 'Credenciales inválidas' })
       }
 
       // se genera el token
@@ -29,7 +29,7 @@ export class AuthController {
       res.cookie('token', token)
       res.json({ message: 'Sesión iniciada', usuario })
     } catch (error) {
-      return res.status(500).json({ message: error.message })
+      return res.status(500).json({ error: error.message })
     }
   }
 
@@ -46,7 +46,7 @@ export class AuthController {
 
       res.json({ message: 'Usuario registrado', usuario })
     } catch (error) {
-      return res.status(500).json({ message: error.message })
+      return res.status(500).json({ error: error.message })
     }
   }
 
@@ -62,7 +62,7 @@ export class AuthController {
       const { password, ...usuario } = usuarioEncontrado
       res.json(usuario)
     } catch (error) {
-      return res.status(500).json({ message: error.message })
+      return res.status(500).json({ error: error.message })
     }
   }
 }
