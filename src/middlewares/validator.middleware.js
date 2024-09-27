@@ -1,17 +1,12 @@
 export class ValidatorMiddleware {
-  constructor ({ schema }) {
-    this.schema = schema
-  }
-
-  validateSchema = async (req, res, next) => {
+  validateSchema = (schema) => async (req, res, next) => {
     try {
-      const result = await this.schema.parse(req.body)
-      if (!result.success) {
-        return res.status(400).json({ message: result.error.details[0].message })
-      }
+      schema.parse(req.body)
       next()
     } catch (error) {
-      return res.status(400).json({ message: error.message })
+      return res
+        .status(400)
+        .json({ errors: error.errors.map(err => err.message) })
     }
   }
 }
