@@ -1,14 +1,14 @@
-import { connection } from "../db.js";
+import { connection } from '../db.js'
 
 export class UsuarioModel {
-  static async getAll() {
+  static async getAll () {
     const [usuarios] = await connection.query(`
         SELECT * FROM Usuarios;
       `)
     return usuarios
   }
 
-  static async getById({ id_usuario }) {
+  static async getById ({ idUsuario }) {
     const [usuario] = await connection.query(`
         SELECT 
           BIN_TO_UUID(id_usuario) id_usuario, 
@@ -18,12 +18,12 @@ export class UsuarioModel {
           password, 
           rol 
         FROM Usuarios WHERE BIN_TO_UUID(id_usuario) = ?;
-      `, [id_usuario])
+      `, [idUsuario])
     if (usuario.length === 0) throw new Error('El usuario no existe')
     return usuario[0]
   }
 
-  static async getByEmail({ email }) {
+  static async getByEmail ({ email }) {
     const [usuario] = await connection.query(`
         SELECT 
           BIN_TO_UUID(id_usuario) id_usuario, 
@@ -38,19 +38,7 @@ export class UsuarioModel {
     return usuario[0]
   }
 
-  static async authenticate({ email, pw }) {
-    // Verifica si el usuario con el email existe
-    const [userQuery] = await connection.query(`
-        SELECT * FROM Usuarios WHERE email = ?;
-      `, [email])
-    if (userQuery.length === 0) throw new Error('No existe usuario con ese email')
-    // verifica si la contraseña concuerda
-    const [{ password }] = userQuery
-    if (password !== pw) return false
-    return userQuery[0]
-  }
-
-  static async register({ input }) {
+  static async register ({ input }) {
     const { nombre, apellido, email, password, rol } = input
 
     // verificar si el usuario ya existe
@@ -64,7 +52,7 @@ export class UsuarioModel {
         SELECT UUID() uuid;
       `)
     const [{ uuid }] = uuidResult
-    
+
     // registrar usuario
     try {
       await connection.query(`
@@ -87,7 +75,7 @@ export class UsuarioModel {
         FROM Usuarios 
         WHERE BIN_TO_UUID(id_usuario) = ?;
       `, [uuid])
-    
+
     const usuario = usuarioQuery[0]
 
     return usuario

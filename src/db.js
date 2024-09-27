@@ -1,5 +1,5 @@
-import mysql from 'mysql2/promise';
-import { DATABASE, HOST, MYSQL_PORT, PASSWORD, USER } from './config.js';
+import mysql from 'mysql2/promise'
+import { DATABASE, HOST, MYSQL_PORT, PASSWORD, USER } from './config.js'
 
 export const connection = await mysql.createConnection({
   host: HOST,
@@ -7,13 +7,13 @@ export const connection = await mysql.createConnection({
   user: USER,
   password: PASSWORD,
   database: DATABASE
-});
+})
 
 export const connectDB = async () => {
   try {
-    await connection.connect();
-    console.log('<<< Database connected >>>');
+    await connection.connect()
+    console.log('<<< Database connected >>>')
   } catch (error) {
-    console.log('Error connecting to database:', error);
+    console.log('Error connecting to database:', error)
   }
 }
