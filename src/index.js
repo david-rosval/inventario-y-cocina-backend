@@ -1,9 +1,8 @@
 import app from './app.js'
 import { PORT } from './config.js'
-import { connectDB } from './db.js'
 
-connectDB()
+const port = PORT ?? 1234
 
-app.listen(PORT, () => {
+app.listen(port, () => {
   console.log(`Server is listening on http://localhost:${PORT}`)
 })
