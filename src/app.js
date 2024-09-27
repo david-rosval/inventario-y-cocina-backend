@@ -1,6 +1,8 @@
 import express from 'express'
-import { PORT } from './config.js'
 import morgan from 'morgan'
+import { createAuthRouter } from './routes/auth.routes.js'
+
+import { UsuarioModel } from './models/usuario.model.js' 
 
 const app = express()
 
@@ -10,5 +12,7 @@ app.use(express.json())
 app.get('/', (req, res) => {
   res.send('gestion de inventario y comunicación con cocina!')
 })
+
+app.use('/api/auth', createAuthRouter({ usuarioModel: UsuarioModel }))
 
 export default app

@@ -1,3 +1,8 @@
 export const {
-  PORT
+  PORT,
+  HOST,
+  MYSQL_PORT,
+  USER,
+  PASSWORD,
+  DATABASE,
 } = process.env

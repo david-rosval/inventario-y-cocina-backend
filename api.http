@@ -1,13 +1,17 @@
 ### GET usuarios
-GET http://localhost:3000/api/usuarios
+GET http://localhost:1234/api/usuarios
 
 ### Registrar usuario
-POST http://localhost:3000/api/usuarios
+POST http://localhost:1234/api/auth/register
 Content-Type: application/json
 
 {
-    "nombre": "nombre",
-    "apellido": "apellido",
-    "email": "email",
-    "password": "password"
+    "nombre": "Nayeli",
+    "apellido": "Silva Quiñon",
+    "email": "nayeli.silva@example.com",
+    "password": "password3",
+    "rol": "Cocinero"
 }
+
+### GET api/auth
+GET http://localhost:1234/api/auth
