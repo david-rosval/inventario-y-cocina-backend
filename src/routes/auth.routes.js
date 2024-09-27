@@ -12,9 +12,9 @@ export const createAuthRouter = ({ usuarioModel }) => {
   
   authRouter.post('/register', authController.register)
   
-  authRouter.post('/login', async (req, res) => {
-    
-  })
+  authRouter.post('/login', authController.login)
+
+  authRouter.post('/logout', authController.logout)
 
   return authRouter
 }

@@ -8,16 +8,31 @@ export class UsuarioModel {
     return usuarios
   }
 
+  static async getByEmail({ email }) {
+    const [usuario] = await connection.query(`
+        SELECT 
+          BIN_TO_UUID(id_usuario) id_usuario, 
+          nombre, 
+          apellido, 
+          email, 
+          password, 
+          rol 
+        FROM Usuarios WHERE email = ?;
+      `, [email])
+    if (usuario.length === 0) throw new Error('No existe usuario con ese email')
+    return usuario[0]
+  }
+
   static async authenticate({ email, pw }) {
     // Verifica si el usuario con el email existe
-    const [pwQuery] = await connection.query(`
-        SELECT password FROM Usuarios WHERE email = ?;
+    const [userQuery] = await connection.query(`
+        SELECT * FROM Usuarios WHERE email = ?;
       `, [email])
-    if (pwQuery.length === 0) throw new Error('No existe usuario con ese email')
+    if (userQuery.length === 0) throw new Error('No existe usuario con ese email')
     // verifica si la contraseña concuerda
-    const [{ password }] = pwQuery
+    const [{ password }] = userQuery
     if (password !== pw) return false
-    return true
+    return userQuery[0]
   }
 
   static async register({ input }) {

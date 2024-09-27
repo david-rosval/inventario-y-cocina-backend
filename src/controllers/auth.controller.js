@@ -7,16 +7,31 @@ export class AuthController {
     this.usuarioModel = usuarioModel
   }
 
-  authenticate = async (req, res) => {
+  login = async (req, res) => {
     const { email, password } = req.body
     try {
-      const authenticated = await this.usuarioModel.authenticate({ email, password })
-      if (!authenticated) {
+      // se verifica si existe un usuario con el email dado
+      const usuarioEncontrado = await this.usuarioModel.getByEmail({ email})
+
+      // se verifica si la contraseña es válida
+      const isValidPassword = await bcrypt.compare(password, usuarioEncontrado.password)
+
+      if (!isValidPassword) {
         return res.status(401).json({ message: 'Credenciales inválidas' })
       }
-      return res.json({ message: 'Autenticación exitosa' })
+
+      // se genera el token
+      const token = await createAccessToken({ id: usuarioEncontrado.id_usuario })
+
+      // no se envía la contraseña en la respuesta
+      const { password: pw, ...usuario } = usuarioEncontrado
+      
+      // se envía el token en la cookie y el usuario registrado
+      res.cookie('token', token)
+      res.json({ message: 'Sesión iniciada', usuario })
+      
     } catch (error) {
-      return res.status(404).json({ message: error.message })
+      return res.status(500).json({ message: error.message })
     }
   }
 
@@ -41,5 +56,10 @@ export class AuthController {
     } catch (error) {
       return res.status(500).json({ message: error.message })
     }
+  }
+
+  logout = async (req, res) => {
+    res.clearCookie('token')
+    res.json({ message: 'Sesión cerrada' })
   }
 }
