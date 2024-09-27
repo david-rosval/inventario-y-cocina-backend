@@ -62,4 +62,15 @@ export class AuthController {
     res.clearCookie('token')
     res.json({ message: 'Sesión cerrada' })
   }
+
+  profile = async (req, res) => {
+    const { id } = req.usuario
+    try {
+      const usuarioEncontrado = await this.usuarioModel.getById({ id_usuario: id })
+      const { password, ...usuario } = usuarioEncontrado
+      res.json(usuario)
+    } catch (error) {
+      return res.status(500).json({ message: error.message })
+    }
+  }
 }

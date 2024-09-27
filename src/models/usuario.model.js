@@ -8,6 +8,21 @@ export class UsuarioModel {
     return usuarios
   }
 
+  static async getById({ id_usuario }) {
+    const [usuario] = await connection.query(`
+        SELECT 
+          BIN_TO_UUID(id_usuario) id_usuario, 
+          nombre, 
+          apellido, 
+          email, 
+          password, 
+          rol 
+        FROM Usuarios WHERE BIN_TO_UUID(id_usuario) = ?;
+      `, [id_usuario])
+    if (usuario.length === 0) throw new Error('El usuario no existe')
+    return usuario[0]
+  }
+
   static async getByEmail({ email }) {
     const [usuario] = await connection.query(`
         SELECT 

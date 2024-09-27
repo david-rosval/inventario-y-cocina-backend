@@ -1,13 +1,15 @@
 import express from 'express'
 import morgan from 'morgan'
-import { createAuthRouter } from './routes/auth.routes.js'
+import cookieParser from 'cookie-parser'
 
+import { createAuthRouter } from './routes/auth.routes.js'
 import { UsuarioModel } from './models/usuario.model.js' 
 
 const app = express()
 
 app.use(morgan('dev'))
 app.use(express.json())
+app.use(cookieParser())
 
 app.get('/', (req, res) => {
   res.send('gestion de inventario y comunicación con cocina!')
