@@ -5,7 +5,7 @@ export class AuthMiddleware {
     const { token } = req.cookies
 
     if (!token) {
-      return res.status(401).json({ message: 'No se encontró el token' })
+      return res.status(401).json({ error: 'No se encontró el token' })
     }
 
     try {
@@ -13,14 +13,14 @@ export class AuthMiddleware {
       req.usuario = usuario
       next()
     } catch (error) {
-      return res.status(403).json({ message: 'Token inválido' })
+      return res.status(403).json({ error: 'Token inválido' })
     }
   }
 
   adminRequired = async (req, res, next) => {
     const { rol } = req.usuario
     if (rol !== 'Administrador') {
-      return res.status(403).json({ message: 'Acceso denegado' })
+      return res.status(403).json({ error: 'Operación denegada por falta de permisos' })
     }
     next()
   }

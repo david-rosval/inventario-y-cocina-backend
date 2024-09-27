@@ -1,5 +1,5 @@
 import bcrypt from 'bcrypt'
-import { createAccessToken } from '../libs/jwt.js'
+import { createAccessToken, verifyToken } from '../libs/jwt.js'
 
 export class AuthController {
   constructor ({ usuarioModel }) {
@@ -63,6 +63,21 @@ export class AuthController {
       res.json(usuario)
     } catch (error) {
       return res.status(500).json({ error: error.message })
+    }
+  }
+
+  verify = async (req, res) => {
+    const { token } = req.cookies
+    if (!token) return res.status(401).json({ error: 'No se encontró el token' })
+
+    try {
+      const usuario = await verifyToken(token)
+      const { id } = usuario
+      const usuarioEncontrado = await this.usuarioModel.getById({ idUsuario: id })
+      const { password, ...user } = usuarioEncontrado
+      res.json(user)
+    } catch (error) {
+      return res.status(403).json({ error: 'Token inválido' })
     }
   }
 }

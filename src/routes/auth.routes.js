@@ -28,5 +28,7 @@ export const createAuthRouter = ({ usuarioModel }) => {
 
   authRouter.get('/profile', authMiddleware.authRequired, authController.profile)
 
+  authRouter.get('/verify', authController.verify)
+
   return authRouter
 }
