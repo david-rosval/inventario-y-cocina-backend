@@ -16,4 +16,13 @@ export class AuthMiddleware {
       return res.status(403).json({ message: 'Token inválido' })
     }
   }
+
+  adminRequired = async (req, res, next) => {
+    const { rol } = req.usuario
+    if (rol !== 'Administrador') {
+      return res.status(403).json({ message: 'Acceso denegado' })
+    }
+    next()
+  }
+
 }

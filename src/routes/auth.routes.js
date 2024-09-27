@@ -12,7 +12,7 @@ export const createAuthRouter = ({ usuarioModel }) => {
     res.send('Auth router')
   })
   
-  authRouter.post('/register', authController.register)
+  authRouter.post('/register', authMiddleware.authRequired, authMiddleware.adminRequired, authController.register)
   
   authRouter.post('/login', authController.login)
 

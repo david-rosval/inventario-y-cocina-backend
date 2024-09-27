@@ -21,7 +21,7 @@ export class AuthController {
       }
 
       // se genera el token
-      const token = await createAccessToken({ id: usuarioEncontrado.id_usuario })
+      const token = await createAccessToken({ id: usuarioEncontrado.id_usuario, rol: usuarioEncontrado.rol })
 
       // no se envía la contraseña en la respuesta
       const { password: pw, ...usuario } = usuarioEncontrado
@@ -44,13 +44,8 @@ export class AuthController {
 
       // registro del usuario y obtención del usuario registrado
       const usuarioRegistrado = await this.usuarioModel.register({ input })
-      const { password, ...usuario } = usuarioRegistrado
+      const { password: pw, ...usuario } = usuarioRegistrado
 
-      // se genera el token
-      const token = await createAccessToken({ id: usuarioRegistrado.id_usuario })
-      
-      // se envía el token en la cookie y el usuario registrado
-      res.cookie('token', token)
       res.json({ message: 'Usuario registrado', usuario })
       
     } catch (error) {
