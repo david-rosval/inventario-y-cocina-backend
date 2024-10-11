@@ -21,7 +21,7 @@ app.use(cors({
 }))
 
 app.get('/', (req, res) => {
-  res.send('gestion de inventario y comunicación con cocina!')
+  res.send('API de Villa 29 🍺 - Gestión de Inventario y Pedidos')
 })
 
 app.use('/api/auth', createAuthRouter({ usuarioModel: UsuarioModel }))
