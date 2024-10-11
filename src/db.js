@@ -1,12 +1,12 @@
 import mysql from 'mysql2/promise'
-import { DATABASE, HOST, MYSQL_PORT, PASSWORD, USER } from './config.js'
+import { DB_DATABASE, DB_HOST, DB_MYSQL_PORT, DB_PASSWORD, DB_USER } from './config.js'
 
 export const connection = await mysql.createConnection({
-  host: HOST,
-  port: MYSQL_PORT,
-  user: USER,
-  password: PASSWORD,
-  database: DATABASE
+  host: DB_HOST,
+  port: DB_MYSQL_PORT,
+  user: DB_USER,
+  password: DB_PASSWORD,
+  database: DB_DATABASE
 })
 
 export const connectDB = async () => {
