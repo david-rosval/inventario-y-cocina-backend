@@ -60,7 +60,7 @@ export class AuthController {
     try {
       const usuarioEncontrado = await this.usuarioModel.getById({ idUsuario: id })
       const { password, ...usuario } = usuarioEncontrado
-      console.log(usuario)
+      console.log('perfil de usuario enviado')
       res.json(usuario)
     } catch (error) {
       return res.status(500).json({ error: error.message })
