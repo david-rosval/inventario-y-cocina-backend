@@ -16,18 +16,7 @@ app.use(morgan('dev'))
 app.use(express.json())
 app.use(cookieParser())
 app.use(cors({
-  origin: (origin, callback) => {
-    if (clientOrigin === '*' || !origin) {
-      // Si no hay un origin o si clientOrigin es '*', permite todos los orígenes
-      callback(null, true)
-    } else if (origin === clientOrigin) {
-      // Si el origin coincide con CLIENT_ORIGIN, permite el acceso
-      callback(null, true)
-    } else {
-      // Si no coincide, bloquea el acceso
-      callback(new Error('No permitido por CORS'))
-    }
-  },
+  origin: clientOrigin,
   credentials: true
 }))
 

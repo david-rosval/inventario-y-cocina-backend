@@ -26,8 +26,8 @@ export class AuthController {
       const { password: pw, ...usuario } = usuarioEncontrado
 
       // se envía el token en la cookie y el usuario registrado
-      res.cookie('token', token)
-      res.json({ message: 'Sesión iniciada', usuario })
+      res.cookie('token', token, { httpOnly: true })
+      res.json({ message: 'Sesión iniciada', usuario, token })
     } catch (error) {
       return res.status(500).json({ error: error.message })
     }
@@ -60,6 +60,7 @@ export class AuthController {
     try {
       const usuarioEncontrado = await this.usuarioModel.getById({ idUsuario: id })
       const { password, ...usuario } = usuarioEncontrado
+      console.log(usuario)
       res.json(usuario)
     } catch (error) {
       return res.status(500).json({ error: error.message })
