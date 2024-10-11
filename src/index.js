@@ -1,5 +1,5 @@
 import app from './app.js'
-import { PORT } from './config.js'
+import { CLIENT_URL, PORT } from './config.js'
 import { createServer } from 'node:http'
 import { Server } from 'socket.io'
 
@@ -7,7 +7,7 @@ const httpServer = createServer(app)
 
 const io = new Server(httpServer, {
   cors: {
-    origin: 'http://localhost:3000',
+    origin: CLIENT_URL,
     methods: ['GET', 'POST'],
     credentials: true
   },
@@ -33,5 +33,5 @@ io.on('connection', async (socket) => {
 })
 
 httpServer.listen(PORT, () => {
-  console.log(`Server is listening on http://localhost:${PORT}`)
+  console.log(`Server is listening on port ${PORT}`)
 })

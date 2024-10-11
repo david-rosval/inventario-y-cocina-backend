@@ -10,13 +10,11 @@ import { CLIENT_URL } from './config.js'
 
 const app = express()
 
-const clientOrigin = CLIENT_URL ?? '*'
-
 app.use(morgan('dev'))
 app.use(express.json())
 app.use(cookieParser())
 app.use(cors({
-  origin: clientOrigin,
+  origin: CLIENT_URL,
   credentials: true
 }))
 
