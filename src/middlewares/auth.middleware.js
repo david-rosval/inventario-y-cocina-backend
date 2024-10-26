@@ -2,15 +2,10 @@ import { verifyToken } from '../libs/jwt.js'
 
 export class AuthMiddleware {
   authRequired = async (req, res, next) => {
-    const { authorization } = req.headers
-    let token = authorization
+    const { authorization: token } = req.headers
 
-    if (!authorization) {
-      const { token: tokenCookie } = req.cookies
-      if (!tokenCookie) {
-        return res.status(401).json({ error: 'No se encontró el token' })
-      }
-      token = tokenCookie
+    if (!token) {
+      return res.status(401).json({ error: 'No se encontró el token' })
     }
 
     try {
