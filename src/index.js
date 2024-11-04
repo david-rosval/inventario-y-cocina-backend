@@ -1,5 +1,5 @@
 import app from './app.js'
-import { CLIENT_URL, PORT } from './config.js'
+import { CLIENT_URL } from './config.js'
 import { createServer } from 'node:http'
 import { Server } from 'socket.io'
 
@@ -32,6 +32,8 @@ io.on('connection', async (socket) => {
   })
 })
 
-httpServer.listen(PORT, () => {
-  console.log(`Server is listening on port ${PORT}`)
+const port = process.env.PORT || 4965
+
+httpServer.listen(port, () => {
+  console.log(`Server is listening on port ${port}`)
 })

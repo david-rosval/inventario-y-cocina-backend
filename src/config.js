@@ -2,7 +2,6 @@ import 'dotenv/config'
 
 const {
   MODE,
-  PORT,
   DB_HOST,
   DB_MYSQL_PORT,
   DB_USER,
@@ -16,7 +15,6 @@ const {
 const CLIENT_URL = (MODE && MODE === 'dev') ? CLIENT_URL_DEV : CLIENT_URL_PROD
 
 export {
-  PORT,
   DB_HOST,
   DB_MYSQL_PORT,
   DB_USER,
