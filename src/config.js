@@ -1,15 +1,27 @@
 import 'dotenv/config'
 
-export const {
+const {
+  MODE,
   PORT,
-
   DB_HOST,
   DB_MYSQL_PORT,
   DB_USER,
   DB_PASSWORD,
   DB_DATABASE,
-
   TOKEN_SECRET,
-
-  CLIENT_URL
+  CLIENT_URL_DEV,
+  CLIENT_URL_PROD
 } = process.env
+
+const CLIENT_URL = (MODE && MODE === 'dev') ? CLIENT_URL_DEV : CLIENT_URL_PROD
+
+export {
+  PORT,
+  DB_HOST,
+  DB_MYSQL_PORT,
+  DB_USER,
+  DB_PASSWORD,
+  DB_DATABASE,
+  TOKEN_SECRET,
+  CLIENT_URL
+}
