@@ -27,6 +27,11 @@ io.on('connection', async (socket) => {
     io.emit('pedido-listo', { message: 'Pedido listo para entregar' })
   })
 
+  socket.on('pedido-entregado', ({ message }) => {
+    console.log('pedido-entregado', message)
+    io.emit('pedido-entregado', { message: 'Pedido entregado al cliente' })
+  })
+
   socket.on('disconnect', () => {
     console.log('a user has disconnected')
   })
