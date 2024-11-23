@@ -29,6 +29,7 @@ export class AuthController {
       res.cookie('token', token, { httpOnly: true })
       res.json({ message: 'Sesión iniciada', usuario, token })
     } catch (error) {
+      console.log(error.message)
       return res.status(500).json({ error: error.message })
     }
   }
@@ -46,6 +47,7 @@ export class AuthController {
 
       res.json({ message: 'Usuario registrado', usuario })
     } catch (error) {
+      console.log(error.message)
       return res.status(500).json({ error: error.message })
     }
   }
@@ -63,6 +65,7 @@ export class AuthController {
       console.log('perfil de usuario enviado')
       res.json(usuario)
     } catch (error) {
+      console.log(error.message)
       return res.status(500).json({ error: error.message })
     }
   }
