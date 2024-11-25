@@ -1,9 +1,9 @@
-import { connection } from '../db.js'
+import { pool } from '../db.js'
 
 export class UsuarioModel {
   static async getAll () {
+    const connection = await pool.getConnection()
     try {
-      await connection.connect()
       const [usuarios] = await connection.query(`
         SELECT * FROM Usuarios;
       `)
@@ -11,13 +11,13 @@ export class UsuarioModel {
     } catch (error) {
       throw new Error('Error al obtener los usuarios')
     } finally {
-      await connection.end()
+      connection.release()
     }
   }
 
   static async getById ({ idUsuario }) {
+    const connection = await pool.getConnection()
     try {
-      await connection.connect()
       const [usuario] = await connection.query(`
         SELECT 
           BIN_TO_UUID(id_usuario) id_usuario, 
@@ -33,13 +33,13 @@ export class UsuarioModel {
     } catch (error) {
       throw new Error('Error al obtener el usuario por id')
     } finally {
-      await connection.end()
+      connection.release()
     }
   }
 
   static async getByEmail ({ email }) {
+    const connection = await pool.getConnection()
     try {
-      await connection.connect()
       const [usuario] = await connection.query(`
         SELECT 
           BIN_TO_UUID(id_usuario) id_usuario, 
@@ -55,14 +55,13 @@ export class UsuarioModel {
     } catch (error) {
       throw new Error('Error al obtener el usuario por email')
     } finally {
-      await connection.end()
+      connection.release()
     }
   }
 
   static async register ({ input }) {
+    const connection = await pool.getConnection()
     try {
-      await connection.connect()
-
       const { nombre, apellido, email, password, rol } = input
 
       // verificar si el usuario ya existe
@@ -102,7 +101,7 @@ export class UsuarioModel {
     } catch (error) {
       throw new Error('Error al registrar el usuario')
     } finally {
-      await connection.end()
+      connection.release()
     }
   }
 }
