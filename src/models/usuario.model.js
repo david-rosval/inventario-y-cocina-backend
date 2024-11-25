@@ -3,7 +3,7 @@ import { connection } from '../db.js'
 export class UsuarioModel {
   static async getAll () {
     try {
-      connection.connect()
+      await connection.connect()
       const [usuarios] = await connection.query(`
         SELECT * FROM Usuarios;
       `)
@@ -17,7 +17,7 @@ export class UsuarioModel {
 
   static async getById ({ idUsuario }) {
     try {
-      connection.connect()
+      await connection.connect()
       const [usuario] = await connection.query(`
         SELECT 
           BIN_TO_UUID(id_usuario) id_usuario, 
@@ -39,7 +39,7 @@ export class UsuarioModel {
 
   static async getByEmail ({ email }) {
     try {
-      connection.connect()
+      await connection.connect()
       const [usuario] = await connection.query(`
         SELECT 
           BIN_TO_UUID(id_usuario) id_usuario, 
@@ -61,7 +61,7 @@ export class UsuarioModel {
 
   static async register ({ input }) {
     try {
-      connection.connect()
+      await connection.connect()
 
       const { nombre, apellido, email, password, rol } = input
 
