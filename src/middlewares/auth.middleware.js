@@ -5,6 +5,7 @@ export class AuthMiddleware {
     const { authorization: token } = req.headers
 
     if (!token) {
+      console.log('No se encontró el token')
       return res.status(401).json({ error: 'No se encontró el token' })
     }
 
@@ -14,6 +15,7 @@ export class AuthMiddleware {
       console.log('token valido')
       next()
     } catch (error) {
+      console.log('Token inválido')
       return res.status(403).json({ error: 'Token inválido' })
     }
   }
@@ -21,6 +23,7 @@ export class AuthMiddleware {
   adminRequired = async (req, res, next) => {
     const { rol } = req.usuario
     if (rol !== 'Administrador') {
+      console.log('Operación denegada por falta de permisos')
       return res.status(403).json({ error: 'Operación denegada por falta de permisos' })
     }
     next()
