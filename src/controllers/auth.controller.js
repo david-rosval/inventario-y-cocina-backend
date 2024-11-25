@@ -29,11 +29,7 @@ export class AuthController {
       res.cookie('token', token, { httpOnly: true })
       res.json({ message: 'Sesión iniciada', usuario, token })
     } catch (error) {
-<<<<<<< HEAD
-      console.log(error)
-=======
       console.log(error.message)
->>>>>>> 41af2d5a57e3c8daf17bcc4c5455f2550c3e00de
       return res.status(500).json({ error: error.message })
     }
   }
@@ -69,11 +65,7 @@ export class AuthController {
       console.log('perfil de usuario enviado')
       res.json(usuario)
     } catch (error) {
-<<<<<<< HEAD
-      console.log(error)
-=======
       console.log(error.message)
->>>>>>> 41af2d5a57e3c8daf17bcc4c5455f2550c3e00de
       return res.status(500).json({ error: error.message })
     }
   }
