@@ -31,7 +31,7 @@ export class UsuarioModel {
       if (usuario.length === 0) throw new Error('El usuario no existe')
       return usuario[0]
     } catch (error) {
-      throw new Error('Error al obtener el usuario')
+      throw new Error('Error al obtener el usuario por id')
     } finally {
       await connection.end()
     }
@@ -53,7 +53,7 @@ export class UsuarioModel {
       if (usuario.length === 0) throw new Error('No existe usuario con ese email')
       return usuario[0]
     } catch (error) {
-      throw new Error('Error al obtener el usuario')
+      throw new Error('Error al obtener el usuario por email')
     } finally {
       await connection.end()
     }
