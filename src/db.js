@@ -7,5 +7,5 @@ export const pool = mysql.createPool({
   user: DB_USER,
   password: DB_PASSWORD,
   database: DB_DATABASE,
-  connectTimeout: 15000
+  connectTimeout: 20000
 })
