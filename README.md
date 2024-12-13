@@ -11,11 +11,11 @@ Este es un proyecto de backend utilizando Express y Socket.io.
 
 1. Clona el repositorio:
     ```bash
-    git clone <URL_DEL_REPOSITORIO>
+    git clone https://github.com/david-rosval/inventario-y-cocina-backend.git
     ```
 2. Navega al directorio del proyecto:
     ```bash
-    cd backend-express-socketio
+    cd inventario-y-cocina-backend
     ```
 3. Instala las dependencias:
     ```bash
