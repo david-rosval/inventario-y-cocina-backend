@@ -37,7 +37,7 @@ io.on('connection', async (socket) => {
   })
 })
 
-const port = process.env.PORT || 4965
+const port = process.env.PORT ?? 3001
 
 httpServer.listen(port, () => {
   console.log(`Server is listening on port ${port}`)
