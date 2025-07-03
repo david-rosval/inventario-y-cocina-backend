@@ -21,15 +21,30 @@ Este es un proyecto de backend utilizando Express y Socket.io.
     ```bash
     npm install
     ```
+    
+## Ejecución en entorno local
 
-## Uso
+### Agrega el archivo .env
+
+Crea el archivo .env en el root del pro con la siguiente estructura:
+```env
+MODE="dev"
+DB_HOST="[db_host]"
+DB_MYSQL_PORT="[db_port]"
+DB_USER="[db_user]"
+DB_PASSWORD="[db_password]"
+DB_DATABASE="[db_database]"
+TOKEN_SECRET="[token_secret_hash]"
+CLIENT_URL_DEV="http://localhost:[frontend-dev-port]"
+```
+
+### Uso
 
 1. Inicia el servidor en modo desarrollo:
     ```bash
     npm run dev
     ```
-2. El servidor estará corriendo en `http://localhost:4965`.
-
+    
 ## Tecnologías Utilizadas
 
 - Express
